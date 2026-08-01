@@ -108,5 +108,11 @@ ORDER BY SUCCESS_RATE DESC;
 -- Query 9: For each department, find the employee with the highest salary.
 --          If multiple employees tie, show all of them.
 -- Expected columns: department_name, employee_name, salary
-
-
+--
+SELECT D.NAME AS department_name, E.NAME AS employee_name, E.SALARY
+FROM DEPARTMENTS D 
+INNER JOIN EMPLOYEES E ON D.ID = E.DEPARTMENT_ID
+--highest salary in each department
+WHERE E.SALARY = (SELECT MAX(SALARY) FROM EMPLOYEES 
+-- current department
+WHERE DEPARTMENT_ID = D.ID);
