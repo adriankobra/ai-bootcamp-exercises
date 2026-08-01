@@ -15,20 +15,30 @@
 
 -- Query 1: List all employees sorted by name alphabetically.
 -- Expected columns: name, salary, hire_date
-
+--select
+SELECT NAME,SALARY,HIRE_DATE 
+--table
+FROM EMPLOYEES
+--asc
+ORDER BY NAME ASC;
 
 
 -- Query 2: List all employees with their department name.
 -- (Hint: you need to JOIN two tables)
 -- Expected columns: employee_name, department_name
-
-
+SELECT E.NAME AS employee_name, D.NAME AS department_name
+FROM EMPLOYEES E
+--need all matching values
+INNER JOIN DEPARTMENTS D ON E.DEPARTMENT_ID=D.ID;
 
 -- Query 3: Count how many employees are in each department.
 -- Expected columns: department_name, employee_count
-
-
-
+--COUNT
+SELECT D.NAME AS department_name, COUNT (E.ID) AS employee_count
+FROM EMPLOYEES E
+INNER JOIN DEPARTMENTS D ON E.DEPARTMENT_ID=D.ID
+--NEED GROUP BECAUSE TO MAKE GROUP BY NAME
+GROUP BY D.NAME;
 -- ============================================================
 -- STANDARD LEVEL — JOINs, aggregations, filtering
 -- ============================================================
