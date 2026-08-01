@@ -45,8 +45,15 @@ GROUP BY D.NAME;
 
 -- Query 4: Find the top 3 departments by average salary.
 -- Expected columns: department_name, avg_salary
-
-
+--also i use round because result with unlimittet simbols after avg
+SELECT D.NAME AS department_name, ROUND(AVG(E.SALARY),2) AS avg_salary
+FROM EMPLOYEES E
+INNER JOIN DEPARTMENTS D ON E.DEPARTMENT_ID=D.ID
+GROUP BY D.NAME
+--desc
+ORDER BY AVG_SALARY DESC
+--first 3
+LIMIT 3;
 
 -- Query 5: Find departments where the total employee salary exceeds the department budget.
 -- Expected columns: department_name, total_salary, budget
