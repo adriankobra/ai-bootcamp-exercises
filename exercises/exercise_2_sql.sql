@@ -82,8 +82,13 @@ GROUP BY D.NAME;
 -- Query 7: Find employees who were hired in the last 12 months and work in departments
 --          with at least one completed project.
 -- Expected columns: employee_name, department_name, hire_date
-
-
+SELECT E.NAME AS employee_name, D.NAME AS department_name, E.HIRE_DATE 
+FROM EMPLOYEES E
+--need 2 joins fot 3 table
+INNER JOIN DEPARTMENTS D ON E.DEPARTMENT_ID=D.ID 
+INNER JOIN PROJECTS P ON D.ID=P.DEPARTMENT_ID 
+--in the last 12 months wrom now and work in departmentswith at least one completed project.
+WHERE E.HIRE_DATE >= '2025-08-01' AND P.STATUS = 'completed';
 
 -- Query 8: Rank departments by their "project success rate"
 --          (completed projects / total projects). Exclude departments with no projects.
