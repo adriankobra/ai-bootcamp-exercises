@@ -172,7 +172,18 @@ def avg_resolution_time_by_priority(df) -> dict:
     Resolution time = resolved_at - created_at
     """
     # TODO: Implement this function
-    pass
+    import pandas as pd
+     #to datetime
+    df["resolved_at"] = pd.to_datetime(df["resolved_at"])
+    # resolution time
+    df["resolution_time"] = df["resolved_at"] - df["created_at"]
+
+    #to hours
+    df["resolution_time"] = df["resolution_time"].dt.total_seconds() / 3600
+    #by priority and rounding
+    average_time = df.groupby("priority")["resolution_time"].mean().round(2)
+    #result
+    return average_time.to_dict()
 
 
 def highest_unresolved_category(df) -> str:
