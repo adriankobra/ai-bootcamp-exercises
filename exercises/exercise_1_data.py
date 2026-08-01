@@ -189,8 +189,20 @@ def avg_resolution_time_by_priority(df) -> dict:
 def highest_unresolved_category(df) -> str:
     """Return the category with the highest percentage of unresolved tickets."""
     # TODO: Implement this function
-    pass
+    import pandas as pd
 
+    # unresolved tickets
+    unresolved = df[df["status"] == "open"]
+
+    # tickets 
+    total = df["category"].value_counts()
+
+    # unresolved tickets 
+    unresolved_count = unresolved["category"].value_counts()
+     # percentage
+    percentage = unresolved_count / total
+    # return highest percentage
+    return percentage.idxmax()
 
 # ============================================================
 # ADVANCED LEVEL — Optimization, edge cases, and design
