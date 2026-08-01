@@ -94,7 +94,16 @@ WHERE E.HIRE_DATE >= '2025-08-01' AND P.STATUS = 'completed';
 --          (completed projects / total projects). Exclude departments with no projects.
 -- Expected columns: department_name, total_projects, completed_projects, success_rate
 
-
+SELECT D.NAME AS department_name, COUNT(P.ID) AS total_projects, 
+--With case can easy make if else
+SUM(CASE WHEN P.STATUS = 'completed' THEN 1 ELSE 0 END) AS completed_projects, 
+-- need *1.0 for decimal result
+ROUND((SUM(CASE WHEN P.STATUS = 'completed' THEN 1 ELSE 0 END)* 1.0 /COUNT(P.ID)),2) AS success_rate
+FROM DEPARTMENTS D
+INNER JOIN PROJECTS P ON D.ID=P.DEPARTMENT_ID
+GROUP BY D.NAME
+-- Rank 
+ORDER BY SUCCESS_RATE DESC;
 
 -- Query 9: For each department, find the employee with the highest salary.
 --          If multiple employees tie, show all of them.
