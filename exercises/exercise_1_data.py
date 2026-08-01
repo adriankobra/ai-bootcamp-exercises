@@ -85,7 +85,7 @@ def filter_by_priority(rows: list[dict], priority: str) -> list[dict]:
     # TODO: Implement this function
     # empty
     filtered_priority = []
-    #chech every row
+    #check every row
     for row in rows:
             #to lowercase every word
             if row["priority"].lower() == priority.lower():
@@ -101,7 +101,18 @@ def find_missing_descriptions(rows: list[dict]) -> list[str]:
     Return ticket_ids where 'description' is empty or missing.
     """
     # TODO: Implement this function
-    pass
+    missing_descriptions = []
+    #every row
+    for row in rows:
+                #check eveery row is empty
+            if row.get("description") == "" or row.get("description") is None:
+                # add rows id
+                missing_descriptions.append(row["ticket_id"])
+        #return result
+    return missing_descriptions
+
+
+
 
 
 # ============================================================
