@@ -53,7 +53,28 @@ def count_by_status(rows: list[dict]) -> dict:
     Return a dict like: {"open": 12, "resolved": 23}
     """
     # TODO: Implement this function
-    pass
+
+    #create  empty dictionary
+    status_count = {}
+    #open count by searching word +1 word open in every row
+    open_count = 0
+    for row in rows:
+        if row["status"] == "open":
+            open_count += 1
+    
+    #resolved count by searching word resolved in every row + 1
+    resolved_count = 0
+    for row in rows:
+        if row["status"] == "resolved":
+            resolved_count += 1
+
+    #add result to dictionary
+    status_count["open"] = open_count
+    status_count["resolved"] = resolved_count
+    #return result
+    return status_count
+
+        
 
 
 def filter_by_priority(rows: list[dict], priority: str) -> list[dict]:
