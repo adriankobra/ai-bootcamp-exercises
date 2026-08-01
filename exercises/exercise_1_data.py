@@ -123,7 +123,11 @@ def load_data(filepath: str):
     """Load the CSV file and return a pandas DataFrame."""
     import pandas as pd
     # TODO: Implement this function
-    pass
+    # DataFrame 
+    df = pd.read_csv(filepath)
+    #print (df) 
+    return(df) 
+
 
 
 def clean_data(df):
@@ -136,7 +140,18 @@ def clean_data(df):
     Return the cleaned DataFrame.
     """
     # TODO: Implement this function
-    pass
+    import pandas as pd
+
+    #1 remove empty descriptions with dropha subset=colums
+    df = df.dropna(subset=["description"])
+
+    #2 priority to lowercase with str.lower
+    df["priority"] = df["priority"].str.lower()
+    
+    #3 created_at to datetime 
+    df["created_at"] = pd.to_datetime(df["created_at"], format='mixed')
+    #return clean file
+    return df
 
 
 def tickets_per_month(df) -> dict:
