@@ -68,9 +68,13 @@ HAVING SUM(E.SALARY) > D.BUDGET;
 -- Query 6: Count the number of active projects per department,
 --          including departments with zero active projects.
 -- Expected columns: department_name, active_project_count
-
-
-
+--count projects.ID
+SELECT D.NAME AS department_name, COUNT (P.ID) AS active_project_count
+FROM DEPARTMENTS D
+-- LEFT JOIN keeps all departments including departments with zero active
+LEFT JOIN PROJECTS P ON D.ID = P.DEPARTMENT_ID AND P.STATUS = 'active'
+--number of active (where)
+GROUP BY D.NAME;
 -- ============================================================
 -- ADVANCED LEVEL — Subqueries, complex logic
 -- ============================================================
