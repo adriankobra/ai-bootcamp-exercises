@@ -42,7 +42,7 @@ def load_csv_manual(filepath: str) -> list[dict]:
         list_of_csv = list(data)
         
         #print
-        print (list_of_csv)
+        #print (list_of_csv)
         #return list
         return list_of_csv
     
