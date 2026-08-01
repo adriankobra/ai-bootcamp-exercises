@@ -32,8 +32,20 @@ def load_csv_manual(filepath: str) -> list[dict]:
     Example: [{"ticket_id": "1", "title": "Login issue", ...}, ...]
     """
     # TODO: Implement using open() and csv module or manual parsing
-    pass
 
+    import csv 
+    #open file
+    with open(filepath, "r", newline="") as file:
+        #dictionaries
+        data = csv.DictReader(file)
+        #make list
+        list_of_csv = list(data)
+        
+        #print
+        print (list_of_csv)
+        #return list
+        return list_of_csv
+    
 
 def count_by_status(rows: list[dict]) -> dict:
     """
