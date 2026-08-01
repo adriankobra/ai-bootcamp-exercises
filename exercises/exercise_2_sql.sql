@@ -57,8 +57,13 @@ LIMIT 3;
 
 -- Query 5: Find departments where the total employee salary exceeds the department budget.
 -- Expected columns: department_name, total_salary, budget
-
-
+SELECT D.NAME AS department_name, SUM(E.SALARY) AS total_salary, D.BUDGET AS budget
+FROM EMPLOYEES E
+INNER JOIN DEPARTMENTS D ON E.DEPARTMENT_ID=D.ID
+--also need budget group
+GROUP BY D.NAME, D.BUDGET
+--employee salary exceeds the department  
+HAVING SUM(E.SALARY) > D.BUDGET;
 
 -- Query 6: Count the number of active projects per department,
 --          including departments with zero active projects.
