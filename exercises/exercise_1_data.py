@@ -39,12 +39,12 @@ def load_csv_manual(filepath: str) -> list[dict]:
         #dictionaries
         data = csv.DictReader(file)
         #make list
-        list_of_csv = list(data)
+        rows = list(data)
         
         #print
-        #print (list_of_csv)
+        #print (rows)
         #return list
-        return list_of_csv
+        return rows
     
 
 def count_by_status(rows: list[dict]) -> dict:
@@ -83,7 +83,17 @@ def filter_by_priority(rows: list[dict], priority: str) -> list[dict]:
     Example: filter_by_priority(rows, "high") returns all high-priority tickets.
     """
     # TODO: Implement this function
-    pass
+    # empty
+    filtered_priority = []
+    #chech every row
+    for row in rows:
+            #to lowercase every word
+            if row["priority"].lower() == priority.lower():
+                # add rows 
+                filtered_priority.append(row)
+    #return result
+    return filtered_priority
+
 
 
 def find_missing_descriptions(rows: list[dict]) -> list[str]:
