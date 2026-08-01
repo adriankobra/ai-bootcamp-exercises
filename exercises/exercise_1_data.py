@@ -157,7 +157,13 @@ def clean_data(df):
 def tickets_per_month(df) -> dict:
     """Return the number of tickets created per month (as a dict or Series)."""
     # TODO: Implement this function
-    pass
+    import pandas as pd
+    #only month and year
+    months = df["created_at"].dt.strftime("%Y-%m")
+    #count tickets
+    tickets = months.value_counts()
+    #return as a dict
+    return tickets.to_dict()
 
 
 def avg_resolution_time_by_priority(df) -> dict:
