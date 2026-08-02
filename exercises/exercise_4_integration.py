@@ -94,7 +94,44 @@ def basic_stats(documents: list[dict]) -> dict:
     - longest_doc: str (filename)
     """
     # TODO: Implement this function
-    pass
+    ## total_documents
+    total_documents = len(documents)
+    #total words in all documents
+    total_words = 0
+
+    # names of shortest and longest document
+    shortest_doc = ""
+    longest_doc = ""
+    # number of words in shortest and longest document 100000 mean inf
+    shortest_words = 1000000
+    longest_words = 0
+    #every document
+    for doc in documents:
+
+        #words in current document
+        words = word_count(doc["content"])
+        # add words to total
+        total_words = total_words + words
+
+        # if current document is shorter
+        if words < shortest_words:
+            shortest_words = words
+            shortest_doc = doc["filename"]
+        # if current document is longer
+        if words > longest_words:
+            longest_words = words
+            longest_doc = doc["filename"]
+    #avg  words
+    avg_words_per_doc = total_words / total_documents
+    # return statistics
+    return {
+        "total_documents": total_documents,
+        "total_words": total_words,
+        "avg_words_per_doc": avg_words_per_doc,
+        "shortest_doc": shortest_doc,
+        "longest_doc": longest_doc,
+    }
+# this part was difficult, so I used AI a little to understand the logic
 
 
 # ============================================================
