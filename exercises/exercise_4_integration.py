@@ -33,7 +33,21 @@ def read_documents(folder: Path) -> list[dict]:
     Return a list of dicts: [{"filename": str, "content": str}, ...]
     """
     # TODO: Implement this function
-    pass
+    documents = []
+    # https://www.geeksforgeeks.org/ need glob to choose only .txt
+    for file in folder.glob("*.txt"):
+        # read file 
+        content = file.read_text(encoding="utf-8")
+    #list of dicts
+        documents.append({
+            "filename": file.name,
+            "content": content
+        })
+    #print (documents) check
+    return documents
+
+
+
 
 
 def word_count(text: str) -> int:
