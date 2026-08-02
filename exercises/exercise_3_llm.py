@@ -132,7 +132,30 @@ def extract_company_info(text: str) -> list[dict]:
 def extract_with_prompt_v1(text: str) -> list[dict]:
     """First prompt approach for extraction."""
     # TODO: Implement your first prompt strategy
-    pass
+    #  I decided to include the expected output for the first company
+    # and ask the model to use the same format for the remaining companies.
+    prompt = f"""
+    Read the company descriptions and extract the following information for each company 
+    like:
+    
+    "company_name": "TechNova Solutions",
+    "industry": "Cloud infrastructure management and DevOps automation tools",
+    "founded_year": 2018,
+    "num_employees": 120,
+    "key_products": [
+      "CloudOrbit",
+      "NovaDeploy"
+        ]
+      ,
+    Use the same format for all companies.
+    Company description:
+    {text}
+
+    Return a list of dictionaries with valid JSON-parseable output.
+    """
+    response = call_llm(prompt)
+    ## turn the JSON string into a Python object
+    return json.loads(response)    
 
 
 def extract_with_prompt_v2(text: str) -> list[dict]:
