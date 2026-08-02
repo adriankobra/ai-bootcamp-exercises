@@ -25,12 +25,10 @@ _Mark which level you reached per exercise:_
 I loaded the CSV file using Python's csv module because it makes it easy to access values by column name. Then I used loops(for), lists([]), and dictionaries like(status_count["open"] = open_count) for the BASE level tasks.I also used append() to add needed rows to a list and lower() to compare words without case sensitivity. 
 For the STANDARD level, I used pandas because the exercise required using it for data cleaning and analysis. Loading the file with pandas was very easy because it only required one line of code. Cleaning the data was also straightforward because I found the necessary functions on W3Schools, such as dropna() for removing empty values, to_datetime() for converting dates, and similar functions. I also looked at different ways of working with dates and time, such as strftime(). Also, I divided by 3600 to convert seconds into hours, rounded the results, and used other simple pandas functions where needed.
 
-**If you completed BASE:** What was your strategy for handling the messy priority values (mixed case like "HIGH", "high", "High")? Did you use any specific Python technique?
-
+**If you completed BASE:** What was your strategy for handling the messy priority values (mixed case like "HIGH", "high", "High")? Did you use any specific Python technique? 
 As I mentioned earlier, I used the lower() method to make all letters lowercase before comparing them. I used this approach because we usually used the same logic in similar tasks at university.
 
 **If you completed STANDARD:** What would you change if this dataset had 1 million rows instead of 35?
-
 Honestly, I would not change much because pandas is already designed to work with large datasets. I might improve some parts of my code to make them more efficient, but I cannot say exactly what I would change because I have not compared different solutions yet.
 
 **If you completed ADVANCED:** How did you decide what counts as an "anomaly"? Where do you draw the line between messy data and actually wrong data?

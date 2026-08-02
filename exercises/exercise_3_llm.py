@@ -110,7 +110,23 @@ def extract_company_info(text: str) -> list[dict]:
     Return a list of dictionaries with valid JSON-parseable output.
     """
     # TODO: Implement LLM API call with appropriate prompt
-    pass
+    prompt = f"""
+    Read the company descriptions and extract the following information for each company:
+
+    - company_name
+    - industry
+    - founded_year
+    - num_employees
+    - key_products
+
+    Company description:
+    {text}
+
+    Return only a JSON (list of dictionaries). Do not return a JSON object. Do not use markdown.
+    """
+    response = call_llm(prompt)
+    ## turn the JSON string into a Python object
+    return json.loads(response)
 
 
 def extract_with_prompt_v1(text: str) -> list[dict]:
