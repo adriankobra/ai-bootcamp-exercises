@@ -15,7 +15,7 @@ _Mark which level you reached per exercise:_
 | 1 - Python & Data | [X] | [X] | [ ] |
 | 2 - SQL | [X] | [X] | [X] |
 | 3 - LLM | [X] | [X] | [ ] |
-| 4 - Integration | [ ] | [ ] | [ ] |
+| 4 - Integration | [X] | [X] | [ ] |
 
 ---
 
@@ -122,9 +122,31 @@ The first prompt produced the exact format I wanted because I showed an example.
 
 **Your approach:** _Describe what you did and why._
 
+While working on Exercise 4, the BASE level was quite difficult for me. First, I had to learn how to read files using the Path library because I had never used it before. I found a simple solution on the internet. Counting words was easier because I already knew about the split() function and using len(). The stop words part was also not too difficult, but I did not know about Counter, so I learned it from online documentation.The basic_stats function was the hardest part of the BASE level because it required combining several ideas. For example, I borrowed the idea of using 1000000 and 0 as starting values from AI, and I also needed help understanding how to keep track of the shortest and longest documents. After that, the for loop became clearer, but overall the BASE level was still challenging for me.
+The STANDARD level was easier at the beginning because it was similar to Exercise 3. The functions for prompting the LLM were familiar. However, I did not know how to save JSON results, so I found the solution in the Python documentation. Finally, in generate_report, I understood most of the logic, but I used AI to better understand the last part report += f"{word}: {count}\n"
+Overall, I can say that both the BASE and STANDARD levels contained several tasks that were completely new to me, so I had to learn new concepts from documentation, the internet, and AI while completing the exercise.
+
 **If you completed BASE:** How did you handle stop-word removal in keyword extraction? What list did you use and would you change it?
 
+I used a simple list of stop words and checked every word against that list. I would not change this approach because a list is easy to use and understand, and it worked well for this exercise.
+
 **If you completed STANDARD:** If one document fails during LLM processing, does your pipeline stop or continue? Paste the specific code that handles this.
+
+If one document fails, my pipeline stops. I did not implement error recovery, so there is no try block to continue processing.
+def process_all_documents(documents: list[dict]) -> list[dict]:
+    results = []
+
+    for doc in documents:
+        analysis = analyze_document(doc["content"])
+
+        results.append({
+            "filename": doc["filename"],
+            "summary": analysis["summary"],
+            "keywords": analysis["keywords"],
+            "sentiment": analysis["sentiment"],
+        })
+
+    return results
 
 **If you completed ADVANCED:** How does your incremental processing detect which documents were already processed? What happens if the output file gets corrupted?
 
@@ -136,10 +158,17 @@ _These questions are about your experience doing the task, not the code itself._
 
 1. **What did you get stuck on longest?** Describe the specific moment — what you were trying to do, what went wrong, and how you got past it.
 
+I got stuck the longest on Exercises 1 and 4 because I do not know all Python functions yet. Sometimes I could not figure out which approach to use because I did not know that a certain function existed, or I simply forgot about it. Most of my difficulties were related to Python. I was usually able to find or remember the solution, but it took much more time. There were also a few moments when I could not make any progress, so I used AI as an assistant. It suggested possible approaches, recommended Python functions that could solve the problem, and sometimes helped me find mistakes when I thought everything was correct but there was still an error. This probably happened about 4–6 times. As I mentioned, these difficulties were only with Python; I did not have similar problems with SQL.
+
 2. **What did you Google/search for during this task?** List 2–3 specific things you looked up.
+
+I opened W3Schools many times because it has a simple interface and it is easy to quickly find examples and practice. I also searched for how to work with JSON because I did not remember all the details, and I looked up the Path library because I did not remember all of its functions and features.
 
 3. **If you used AI tools (Copilot, ChatGPT, etc.), which parts did you use them for?** Be honest — this is not penalized. We want to understand your workflow.
 
+I used ChatGPT Go mainly to help me find mistakes in my code or suggest a Python function that could solve a problem. Sometimes searching through the documentation for the right function took a lot of time, so AI helped me find the right direction faster.
+I did not use AI all the time because it was in my own interest to learn something new. However, there were moments when I did not know how to continue, so I asked ChatGPT for help to understand the next step. I think AI should be used as an assistant because it can also make mistakes, and it is important to understand every line of code yourself instead of just copying it.
+I also sometimes used ChatGPT as a translator because I occasionally have difficulties with English.
 ---
 
 ## Self-Estimation
@@ -148,28 +177,33 @@ _Rate your current skill level honestly (1 = no experience, 5 = very confident):
 
 | Skill | 1 | 2 | 3 | 4 | 5 |
 |-------|---|---|---|---|---|
-| Python programming | [ ] | [ ] | [ ] | [ ] | [ ] |
-| Working with data (files, CSV, JSON) | [ ] | [ ] | [ ] | [ ] | [ ] |
-| pandas / data analysis | [ ] | [ ] | [ ] | [ ] | [ ] |
-| SQL | [ ] | [ ] | [ ] | [ ] | [ ] |
-| Git and version control | [ ] | [ ] | [ ] | [ ] | [ ] |
-| REST APIs (calling/building) | [ ] | [ ] | [ ] | [ ] | [ ] |
-| LLMs and prompt engineering | [ ] | [ ] | [ ] | [ ] | [ ] |
-| Error handling and debugging | [ ] | [ ] | [ ] | [ ] | [ ] |
-| Reading documentation to learn new tools | [ ] | [ ] | [ ] | [ ] | [ ] |
-| Explaining technical concepts to others | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Python programming | [ ] | [2] | [ ] | [ ] | [ ] |
+| Working with data (files, CSV, JSON) | [ ] | [ ] | [3] | [ ] | [ ] |
+| pandas / data analysis | [ ] | [ ] | [3] | [ ] | [ ] |
+| SQL | [ ] | [ ] | [ ] | [4] | [ ] |
+| Git and version control | [ ] | [ ] | [3] | [ ] | [ ] |
+| REST APIs (calling/building) | [ ] | [2] | [ ] | [ ] | [ ] |
+| LLMs and prompt engineering | [ ] | [ ] | [ ] | [4] | [ ] |
+| Error handling and debugging | [ ] | [ ] | [3] | [ ] | [ ] |
+| Reading documentation to learn new tools | [ ] | [ ] | [3] | [ ] | [ ] |
+| Explaining technical concepts to others | [ ] | [2] | [ ] | [ ] | [ ] |
 
 **What is your strongest technical skill overall?**
-_
+I think my strongest technical skill is SQL. I find its logic easy to understand, and I had three SQL courses at university, so I have had a lot of practice. Of course, I still sometimes need to look something up, but I can work with SQL confidently and usually know how to solve problems using it.
 
 **What is the area you most want to improve during the bootcamp?**
-_
+I would like to improve my Python skills the most. I feel comfortable with the basics, but when the tasks become more advanced, I find them much more difficult. I always try to understand the solution instead of just copying it, so I hope to become much more confident with Python during the bootcamp. I would also like to improve my English because it will help me work with documentation and communicate more easily.
 
 **Have you built any personal or work projects before? If yes, briefly describe one:**
 _
-
+One of my main personal projects was a Python application that compared prices from three different websites and displayed the best available price. It used fast page loading and web scraping to collect the data. I built it about a year ago.
+Another important project was my bachelor's thesis. I worked with three different 3D face reconstruction systems on Ubuntu. I had to compile the projects on my own computer, which took a lot of time because I needed to install and configure the correct libraries and dependencies. All of the systems were run and tested through the Linux terminal.
 ---
 
 ## Self-Assessment
 
 _What are you least confident about in your submission? What would you do differently next time?_
+
+I am least confident about some parts of my submission, especially the STANDARD level of Exercise 4. Even though I completed it and it works, there are still a few parts that I do not fully understand. There are also some functions that are still new to me, so I am not completely confident using them yet.I would also say that some parts of the STANDARD level in Exercise 4 were quite difficult for me because they introduced concepts I had not used before.
+Next time, I would spend more time learning those functions and understanding the logic behind them before moving on to the next task.
+When I was not confident enough, I decided not to continue with the ADVANCED level. I only completed the ADVANCED part in SQL because I felt comfortable with it. For the other exercises, I think I do not have enough experience yet. If I did this again, I would spend more time learning the concepts first so I could solve more tasks on my own. 
