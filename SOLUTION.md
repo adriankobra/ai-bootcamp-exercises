@@ -2,9 +2,9 @@
 
 ## Environment
 - Python version: 3.14.3
-- Key libraries used: csv, pandas
-- LLM API used:
-- LLM model used:
+- Key libraries used: csv, pandas, groq
+- LLM API used: Groq API
+- LLM model used: llama-3.3-70b-versatile
 
 ## Highest Level Completed
 
