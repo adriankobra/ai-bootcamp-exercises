@@ -66,7 +66,14 @@ def classify_sentiment(text: str) -> str:
     Return one of: "positive", "neutral", "negative"
     """
     # TODO: Write a prompt that returns only one word
-    pass
+    ##text lower because the first response was "Positive"
+    prompt = f"""
+    Read the company description and classify its sentiment.
+    Return only one lowercase word: "positive", "neutral", or "negative".
+    {text}
+    """
+    response = call_llm(prompt)
+    return response
 
 
 def ask_question(text: str, question: str) -> str:
