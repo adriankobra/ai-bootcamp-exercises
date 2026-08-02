@@ -50,8 +50,15 @@ def summarize_text(text: str) -> str:
     Just call the LLM with a clear prompt and return the response.
     """
     # TODO: Write a prompt and call call_llm()
-    pass
+    #promt  {text} from companany description
+    prompt = f"""
 
+    Read the company description and write a short summary in 2-3 sentences.Return only the summary.
+    {text}
+    """
+    ##call
+    response = call_llm(prompt)
+    return response
 
 def classify_sentiment(text: str) -> str:
     """

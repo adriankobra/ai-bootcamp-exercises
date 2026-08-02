@@ -125,6 +125,6 @@ def call_openai(prompt: str, model: str = "gpt-4o-mini") -> str:
 
 #call_llm = call_ollama
 # call_llm = call_huggingface
-call_llm = call_gemini
-# call_llm = call_groq
+#call_llm = call_gemini
+call_llm = call_groq
 # call_llm = call_openai
