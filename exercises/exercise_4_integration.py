@@ -146,7 +146,24 @@ def analyze_document(content: str) -> dict:
     - sentiment: str (positive/neutral/negative)
     """
     # TODO: Implement LLM-based analysis
-    pass
+    prompt = f"""
+    Analyze the document:
+    {content}
+
+    return only:
+    - summary: str (one sentence)
+    - keywords: list[str] (3-5 keywords)
+    - sentiment: str (positive/neutral/negative)
+    
+    Return ONLY valid JSON.
+    Do not include explanations.
+    Do not include markdown.
+    
+    """
+    ## like 3 exercise
+    response = call_llm(prompt)
+
+    return json.loads(response)
 
 
 def process_all_documents(documents: list[dict]) -> list[dict]:
