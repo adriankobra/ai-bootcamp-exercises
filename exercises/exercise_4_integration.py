@@ -154,15 +154,14 @@ def analyze_document(content: str) -> dict:
     - summary: str (one sentence)
     - keywords: list[str] (3-5 keywords)
     - sentiment: str (positive/neutral/negative)
-    
-    Return ONLY valid JSON.
+
+    Return ONLY valid JSON without ```json.
     Do not include explanations.
     Do not include markdown.
     
     """
     ## like 3 exercise
     response = call_llm(prompt)
-
     return json.loads(response)
 
 
@@ -172,13 +171,29 @@ def process_all_documents(documents: list[dict]) -> list[dict]:
     Each result should contain: filename, summary, keywords, sentiment.
     """
     # TODO: Implement batch processing
-    pass
+    results = []
+    ## analyze every document
+    for doc in documents:
+        analysis = analyze_document(doc["content"])
+        # save analysis together with filename
+        results.append({
+            "filename": doc["filename"],
+            "summary": analysis["summary"],
+            "keywords": analysis["keywords"],
+            "sentiment": analysis["sentiment"],
+        })
+
+    return results
+
 
 
 def save_results(results: list[dict], output_path: Path) -> None:
     """Save results to a JSON file."""
     # TODO: Implement output saving
-    pass
+    # https://docs.python.org/3/library/json.html for json.dump
+    #w-write
+    with open(output_path, "w", encoding="utf-8") as file:
+        json.dump(results, file)
 
 
 def generate_report(results: list[dict]) -> str:
@@ -189,7 +204,44 @@ def generate_report(results: list[dict]) -> str:
     - Top 10 most common keywords across all documents
     """
     # TODO: Implement report generation
-    pass
+    total_documents = len(results)
+
+    positive = 0
+    neutral = 0
+    negative = 0
+
+    keywords = []
+    ## check every result
+    for result in results:
+        if result["sentiment"] == "positive":
+            positive += 1
+
+        elif result["sentiment"] == "neutral":
+            neutral += 1
+
+        elif result["sentiment"] == "negative":
+            negative += 1
+         ## add keywords
+        keywords.extend(result["keywords"])
+    ## count keywords
+    common_keywords = Counter(keywords).most_common(10)
+    #report
+    report = f"""
+    Total documents: {total_documents}
+
+    Positive: {positive}
+    Neutral: {neutral}
+    Negative: {negative}
+
+    Top keywords:
+    """
+    #сounter returns (word, count) pairs, so this loop adds each keyword and its count to the report.
+    for word, count in common_keywords:
+        report += f"{word}: {count}\n"
+
+    return report
+
+
 
 
 # ============================================================
