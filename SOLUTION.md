@@ -22,13 +22,16 @@ _Mark which level you reached per exercise:_
 ## Exercise 1: Data Handling
 
 **Your approach:** _Describe what you did and why._
+
 I loaded the CSV file using Python's csv module because it makes it easy to access values by column name. Then I used loops(for), lists([]), and dictionaries like(status_count["open"] = open_count) for the BASE level tasks.I also used append() to add needed rows to a list and lower() to compare words without case sensitivity. 
 For the STANDARD level, I used pandas because the exercise required using it for data cleaning and analysis. Loading the file with pandas was very easy because it only required one line of code. Cleaning the data was also straightforward because I found the necessary functions on W3Schools, such as dropna() for removing empty values, to_datetime() for converting dates, and similar functions. I also looked at different ways of working with dates and time, such as strftime(). Also, I divided by 3600 to convert seconds into hours, rounded the results, and used other simple pandas functions where needed.
 
 **If you completed BASE:** What was your strategy for handling the messy priority values (mixed case like "HIGH", "high", "High")? Did you use any specific Python technique? 
+
 As I mentioned earlier, I used the lower() method to make all letters lowercase before comparing them. I used this approach because we usually used the same logic in similar tasks at university.
 
 **If you completed STANDARD:** What would you change if this dataset had 1 million rows instead of 35?
+
 Honestly, I would not change much because pandas is already designed to work with large datasets. I might improve some parts of my code to make them more efficient, but I cannot say exactly what I would change because I have not compared different solutions yet.
 
 **If you completed ADVANCED:** How did you decide what counts as an "anomaly"? Where do you draw the line between messy data and actually wrong data?
@@ -38,6 +41,7 @@ Honestly, I would not change much because pandas is already designed to work wit
 ## Exercise 2: SQL
 
 **Your approach:** _Describe what you did and why._
+
 SQL was easier for me than Python. 
 I used SELECT everywhere to get the columns that were required in the tasks. I also wrote all SQL keywords in uppercase because it is easier for me and that is how I learned SQL in my courses.Then I used FROM to get data from the table I needed. When using JOIN, SQL kind of creates a temporary table with the joined data, and FROM works with that result.I used ORDER BY to sort the results (ASC or DESC). AS was used to rename columns to whatever I wanted.
 There are different types of JOIN, but I mainly used INNER JOIN, which returns only matching rows from both tables, and LEFT JOIN, which keeps all rows from the table after FROM and adds matching rows from the second table. GROUP BY was used to group rows by a value so everything is organized before using functions like COUNT, SUM, AVG, or MAX, these are basic SQL functions for calculations.In the Advanced level, I used CASE once because it made the query shorter. 
@@ -57,7 +61,7 @@ If I used INNER JOIN instead, departments without active projects would not appe
 
 For Query 9, I used a subquery with MAX(SALARY). For each department, the subquery finds the highest salary, and then the main query returns the employee whose salary matches that value. If two or more employees have the same highest salary, they will all be returned because they all match the MAX(SALARY) result. 
 I think there are other ways to solve this query, but this was the approach I understood best and it worked correctly for the task.
----
+
 
 ## Exercise 3: LLM & Prompt Engineering
 
@@ -157,15 +161,12 @@ def process_all_documents(documents: list[dict]) -> list[dict]:
 _These questions are about your experience doing the task, not the code itself._
 
 1. **What did you get stuck on longest?** Describe the specific moment — what you were trying to do, what went wrong, and how you got past it.
-
 I got stuck the longest on Exercises 1 and 4 because I do not know all Python functions yet. Sometimes I could not figure out which approach to use because I did not know that a certain function existed, or I simply forgot about it. Most of my difficulties were related to Python. I was usually able to find or remember the solution, but it took much more time. There were also a few moments when I could not make any progress, so I used AI as an assistant. It suggested possible approaches, recommended Python functions that could solve the problem, and sometimes helped me find mistakes when I thought everything was correct but there was still an error. This probably happened about 4–6 times. As I mentioned, these difficulties were only with Python; I did not have similar problems with SQL.
 
 2. **What did you Google/search for during this task?** List 2–3 specific things you looked up.
-
 I opened W3Schools many times because it has a simple interface and it is easy to quickly find examples and practice. I also searched for how to work with JSON because I did not remember all the details, and I looked up the Path library because I did not remember all of its functions and features.
 
 3. **If you used AI tools (Copilot, ChatGPT, etc.), which parts did you use them for?** Be honest — this is not penalized. We want to understand your workflow.
-
 I used ChatGPT Go mainly to help me find mistakes in my code or suggest a Python function that could solve a problem. Sometimes searching through the documentation for the right function took a lot of time, so AI helped me find the right direction faster.
 I did not use AI all the time because it was in my own interest to learn something new. However, there were moments when I did not know how to continue, so I asked ChatGPT for help to understand the next step. I think AI should be used as an assistant because it can also make mistakes, and it is important to understand every line of code yourself instead of just copying it.
 I also sometimes used ChatGPT as a translator because I occasionally have difficulties with English.
@@ -189,16 +190,19 @@ _Rate your current skill level honestly (1 = no experience, 5 = very confident):
 | Explaining technical concepts to others | [ ] | [2] | [ ] | [ ] | [ ] |
 
 **What is your strongest technical skill overall?**
+
 I think my strongest technical skill is SQL. I find its logic easy to understand, and I had three SQL courses at university, so I have had a lot of practice. Of course, I still sometimes need to look something up, but I can work with SQL confidently and usually know how to solve problems using it.
 
 **What is the area you most want to improve during the bootcamp?**
+
 I would like to improve my Python skills the most. I feel comfortable with the basics, but when the tasks become more advanced, I find them much more difficult. I always try to understand the solution instead of just copying it, so I hope to become much more confident with Python during the bootcamp. I would also like to improve my English because it will help me work with documentation and communicate more easily.
 
 **Have you built any personal or work projects before? If yes, briefly describe one:**
-_
+---
+
 One of my main personal projects was a Python application that compared prices from three different websites and displayed the best available price. It used fast page loading and web scraping to collect the data. I built it about a year ago.
 Another important project was my bachelor's thesis. I worked with three different 3D face reconstruction systems on Ubuntu. I had to compile the projects on my own computer, which took a lot of time because I needed to install and configure the correct libraries and dependencies. All of the systems were run and tested through the Linux terminal.
----
+
 
 ## Self-Assessment
 
