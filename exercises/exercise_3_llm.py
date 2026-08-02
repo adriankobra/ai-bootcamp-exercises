@@ -151,11 +151,14 @@ def extract_with_prompt_v1(text: str) -> list[dict]:
     Company description:
     {text}
 
-    Return a list of dictionaries with valid JSON-parseable output.
+    Return ONLY valid JSON.
+    Do not include explanations.
+    Do not include markdown.
     """
+    #I added these(Do not include) because without them the output was hard to understand.
     response = call_llm(prompt)
     ## turn the JSON string into a Python object
-    return json.loads(response)    
+    return json.loads(response)
 
 
 def extract_with_prompt_v2(text: str) -> list[dict]:
@@ -165,10 +168,15 @@ def extract_with_prompt_v2(text: str) -> list[dict]:
 
     Extract the 5 main pieces of information for each company and return a list of dictionaries with valid JSON-parseable output.
     {text}
+    Return ONLY valid JSON.
+    Do not include explanations.
+    Do not include markdown.
+    Do not include any text before or after the JSON
     """
+    ## I added these(Do not include) because without them the output was hard to understand.
     ##call
     response = call_llm(prompt)
-    return json.loads(response)    
+    return json.loads(response)
 
 
 def compare_prompts(text: str) -> None:
@@ -177,7 +185,19 @@ def compare_prompts(text: str) -> None:
     Explain which works better and why (print your explanation).
     """
     # TODO: Implement comparison logic
-    pass
+    result1 = extract_with_prompt_v1(text)
+    result2 = extract_with_prompt_v2(text)
+    print("Prompt v1:")
+    print(result1)
+
+    print("\nPrompt v2:")
+    print(result2)
+
+    print("\nComparison:")
+    print("Prompt v1 worked better because I provided an example of the expected output.")
+    print("Prompt v2 relied more on the LLM, so it changed the field names and output structure.")
+
+
 
 
 # ============================================================
