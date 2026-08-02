@@ -161,7 +161,14 @@ def extract_with_prompt_v1(text: str) -> list[dict]:
 def extract_with_prompt_v2(text: str) -> list[dict]:
     """Second prompt approach for extraction."""
     # TODO: Implement your second prompt strategy
-    pass
+    prompt = f"""
+
+    Extract the 5 main pieces of information for each company and return a list of dictionaries with valid JSON-parseable output.
+    {text}
+    """
+    ##call
+    response = call_llm(prompt)
+    return json.loads(response)    
 
 
 def compare_prompts(text: str) -> None:
