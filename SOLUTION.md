@@ -14,7 +14,7 @@ _Mark which level you reached per exercise:_
 |----------|------|----------|----------|
 | 1 - Python & Data | [X] | [X] | [ ] |
 | 2 - SQL | [X] | [X] | [X] |
-| 3 - LLM | [ ] | [ ] | [ ] |
+| 3 - LLM | [X] | [X] | [ ] |
 | 4 - Integration | [ ] | [ ] | [ ] |
 
 ---
@@ -63,9 +63,56 @@ I think there are other ways to solve this query, but this was the approach I un
 
 **Your approach:** _Describe what you did and why._
 
+At first, I chose Gemini because I had heard about it from friends. I created an API key and tried to connect it through PowerShell, but it did not work. Every time I ran the program, it immediately showed a quota/limit error. Because of that, I switched to Groq, since it was described as fast and free. I followed the same setup process, and it worked without any problems.
+The first thing I learned was that to let the LLM work with the company descriptions, I needed to include {text} in the prompt. For questions, I used the question variable, and I called the model with call_llm().
+The main challenge in the Standard level was getting clean JSON output. At first, the model often returned extra text or explanations, so I had to improve the prompts by adding clearer instructions about the expected output format. Creating different prompts was not difficult because only the prompt changed while the overall logic stayed the same.
+In the end, I compared two different prompt strategies. I found that the more specific and detailed the prompt is, the more accurate and consistent the LLM's response becomes.
+
 **If you completed BASE:** What did you notice about how the LLM responds differently when you change the wording of your prompt? Give a specific example.
 
+I realized that even a very small change in the prompt can completely change the output. For example, when I asked the LLM to choose the main information about each company by itself, it selected different fields, changed the field names, and returned a different structure. When I gave a more specific prompt with an example and clearly asked for only valid JSON, the output matched the expected format much better.
+
 **If you completed STANDARD:** Which of your two prompt strategies worked better? Paste both prompts here and explain what specifically made the difference.
+
+My first prompt strategy worked better because I gave the LLM an example of the expected output. This helped it understand exactly what format I wanted.
+**1**
+    prompt = f"""
+    Read the company descriptions and extract the following information for each company 
+    like:
+    
+    "company_name": "TechNova Solutions",
+    "industry": "Cloud infrastructure management and DevOps automation tools",
+    "founded_year": 2018,
+    "num_employees": 120,
+    "key_products": [
+      "CloudOrbit",
+      "NovaDeploy"
+        ]
+      ,
+    Use the same format for all companies.
+    Company description:
+    {text}
+
+    Return ONLY valid JSON.
+    Do not include explanations.
+    Do not include markdown.
+    """
+
+For the second strategy, I decided to trust the LLM more and let it decide what the main information about each company was.
+
+**2**
+    prompt = f"""
+
+    Extract the 5 main pieces of information for each company and return a list of dictionaries with valid JSON-parseable output.
+    {text}
+    Return ONLY valid JSON.
+    Do not include explanations.
+    Do not include markdown.
+    Do not include any text before or after the JSON
+    """
+The first prompt produced the exact format I wanted because I showed an example. The second prompt was more flexible, so the LLM chose slightly different fields and field names, but the result was still very similar. From this exercise, I learned that if you need very accurate and consistent output, it is better to combine both approaches: clearly explain the task and also provide an example of the expected result.
+
+
 
 **If you completed ADVANCED:** How does your retry logic decide when to give up? What's the worst-case scenario for your error handling?
 
