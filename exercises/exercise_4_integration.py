@@ -53,7 +53,11 @@ def read_documents(folder: Path) -> list[dict]:
 def word_count(text: str) -> int:
     """Return the number of words in a text."""
     # TODO: Implement this function
-    pass
+    #.split() to break it up by spaces
+    words = text.split()
+
+    return len(words)
+
 
 
 def extract_keywords_simple(text: str, top_n: int = 5) -> list[str]:
@@ -63,7 +67,21 @@ def extract_keywords_simple(text: str, top_n: int = 5) -> list[str]:
     Return as a list of lowercase words.
     """
     # TODO: Implement without LLM — use word frequency
-    pass
+    # Exclude common stop words 
+    stop_words = ["the", "a", "is", "in", "of", "and", "to", "for"]
+    #lowercase and split 
+    words = text.lower().split()
+    filtered_words = []
+    #for function where are no one stop words
+    for word in words:
+        # not the and etc.
+        if word not in stop_words:
+            filtered_words.append(word)
+    #counts these words docs.python.org
+    counts = Counter(filtered_words)
+    
+    ## return the most common words
+    return [word for word, count in counts.most_common(top_n)]
 
 
 def basic_stats(documents: list[dict]) -> dict:
