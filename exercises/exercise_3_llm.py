@@ -82,8 +82,16 @@ def ask_question(text: str, question: str) -> str:
     based only on the information in the text.
     """
     # TODO: Implement basic Q&A with context
-    pass
+    prompt = f"""
+    Read the company description and answer the following question based only on the information in the text.
+    {text}
 
+    Question:
+    {question}
+    Return only the answer.
+    """
+    response = call_llm(prompt)
+    return response
 
 # ============================================================
 # STANDARD LEVEL — Structured extraction and prompt design
